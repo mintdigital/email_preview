@@ -1,6 +1,8 @@
 class EmailPreviewController < ApplicationController
+  unloadable
   layout false
 
+  before_filter :validate_unprotected
   before_filter :enforce_allowed_environments
   around_filter :set_delivery_method, :only => :deliver
   before_filter :build_email, :only => [:show, :deliver, :details, :preview]
